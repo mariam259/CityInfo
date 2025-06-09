@@ -1,11 +1,33 @@
+using Microsoft.AspNetCore.StaticFiles;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.ReturnHttpNotAcceptable = true;
+}
+).AddXmlDataContractSerializerFormatters();
+
+//add new attribute for http error response body called additionalInfo
+/*builder.Services.AddProblemDetails(options =>
+ options.CustomizeProblemDetails = ctx =>
+ {
+     ctx.ProblemDetails.Extensions.Add("additionalInfo", "Additional Info Example");
+     //add new attribute for http error response body called server which return server name
+     ctx.ProblemDetails.Extensions.Add("server", Environment.MachineName);
+ }
+
+);
+*/
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 // builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
