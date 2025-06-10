@@ -8,7 +8,8 @@ builder.Services.AddControllers(options =>
 {
     options.ReturnHttpNotAcceptable = true;
 }
-).AddXmlDataContractSerializerFormatters();
+).AddNewtonsoftJson().
+AddXmlDataContractSerializerFormatters();
 
 //add new attribute for http error response body called additionalInfo
 /*builder.Services.AddProblemDetails(options =>
