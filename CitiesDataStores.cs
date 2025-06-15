@@ -4,7 +4,7 @@ namespace CityInfo.API;
 public class CitiesDataStores
 {
     public List<CityDto> Cities { get; set; }
-    public static CitiesDataStores Current { get; } = new CitiesDataStores();
+    // public static CitiesDataStores Current { get; } = new CitiesDataStores();
     public CitiesDataStores()
     {
         //init dummy cities
